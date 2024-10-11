@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+    <script>
+        /*
+        async function calculateSum(){// only frontend happening
+            const a = document.getElementById("firstNumber").value;
+            const b = document.getElementById("secondNumber").value;
+            console.log(a)
+            const element = document.getElementById("finalSum");
+            element.innerHTML = parseInt(a) + parseInt(b);
+            
+
+        } 
+        */
+        // when backend play a role for addition we can not add here by taking input from the body of UI
+
+        /*
+        function calculateSum(){
+            const a = document.getElementById("firstNumber").value;
+            const b = document.getElementById("secondNumber").value;
+            fetch(`http://localhost:3000/sum?a=${a}&b=${b}`)
+                .then(function(response){
+                    //console.log(response)
+                    return response.text();     
+                })
+                .then(function(ans){
+                    console.log(ans)
+                    document.getElementById("finalSum").innerHTML = ans;
+                });
+                .catch(error => {
+                    console.error("Error:", error);
+                    document.getElementById("finalSum").innerHTML = "An error occurred.";
+                });
+
+        }
+        */
+    
+        // use async await
+        /*
+        async function calculateSum(){
+            const a = document.getElementById("firstNumber").value;
+            const b = document.getElementById("secondNumber").value;
+            const response = await fetch(`http://localhost:3000/sum?a=${a}&b=${b}`)
+            const ans = await response.text()
+            document.getElementById("finalSum").innerHTML = ans;
+            
+        }
+        */
+        
+
+        // debouncing
+        let timeout;
+        function debounceCalculteSum(){
+            //calculateSum()
+            // delay the call to populateDiv until ive not been called for 1ØØms
+            // and I've been called at least once
+
+            // we have to clear this time and start new time
+            clearTimeout(timeout)
+            setTimeout(function(){
+                calculateSum()
+            },100)
+        }
+        async function calculateSum(){
+            const a = document.getElementById("firstNumber").value;
+            const b = document.getElementById("secondNumber").value;
+            const response = await fetch(`http://localhost:3000/sum?a=${a}&b=${b}`)
+            const ans = await response.text()
+            document.getElementById("finalSum").innerHTML = ans;
+            
+        }
+    </script>
+
+    <input oninput="debounceCalculteSum()" id="firstNumber" type="text" placeholder="enter a no">
+    <br><br>
+    <input  oninput="debounceCalculteSum()" id="secondNumber" type="text" placeholder="enter a no">
+    <!-- <br><br> -->
+    <!-- <button onclick="calculateSum()">total</button> -->
+    <br> <br>
+    <div id="finalSum">
+      
+    </div>
+
+</body>
+</html>

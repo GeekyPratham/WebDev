@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do </title>
+</head>
+<body>
+    <script>
+        /*
+        function addTask(){
+
+            const title = document.getElementById("title").value;
+            const desc = document.getElementById("description").value;
+            const outerDiv = document.getElementById("tasks").innerHTML;
+            
+            document.getElementById("tasks").innerHTML = outerDiv +
+            `
+                <div>
+                    <div>${title}</div>
+                    <div>${desc}</div>
+                    <button>markdone</button>
+                </div>
+            
+            `
+        }
+        */
+
+        let globalId = 0;
+
+        function markDoneButton(id){
+            const parent = document.getElementById(id);
+            parent.children[2].innerHTML = "Done!"
+        }
+        function appendTask(title,desc,id){
+
+            const innerDiv = document.createElement("div");
+            innerDiv.setAttribute("id",id);
+            const child1 = document.createElement("div");
+            child1.innerHTML = title;
+            
+            const child2 = document.createElement("div");
+            child2.innerHTML = desc;
+
+            const child3 = document.createElement("button");
+            child3.innerHTML = "mark done";
+            child3.setAttribute("onClick",`markDoneButton(${id})`);
+
+            const brk = document.createElement("br");
+            
+
+            innerDiv.appendChild(child1);
+            innerDiv.appendChild(child2);
+            innerDiv.appendChild(child3);
+
+            return innerDiv;
+            
+        }
+        function addTask(){
+
+            const title = document.getElementById("title").value;
+            const desc = document.getElementById("description").value;
+            
+            const outerDiv = document.getElementById("tasks");
+
+            outerDiv.appendChild(appendTask(title,desc,globalId++));
+            
+        }
+    </script>
+    
+    <input id="title" type="text" placeholder="enter the task">
+    <br><br>
+    <input id="description" type="text" placeholder="enter description">
+    <br> <br>
+    <button onclick="addTask()">Add task</button>
+    <br> <br>
+    <div id="tasks">
+
+    </div>
+</body>
+</html>
