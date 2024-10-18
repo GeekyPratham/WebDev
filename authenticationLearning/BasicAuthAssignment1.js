@@ -46,7 +46,8 @@ app.post("/signin", function (req, res) {
   var token = jwt.sign({ 
     username: username,
     password:password
-   }, jwtPassword);
+  }, jwtPassword);
+  
   return res.json({
     token,
   });
